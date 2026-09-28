@@ -1,0 +1,4 @@
+# Per-column DQ rule definitions for source1, in the shape:
+#   column_name: { RuleClassName: { method: ..., params: {...} } }
+# Resolved dynamically by RuleFactory at runtime — adding a rule here
+# never requires a code change.
