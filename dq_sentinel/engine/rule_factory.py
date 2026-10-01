@@ -6,3 +6,17 @@ DQRuleBase.registry and returns a ready-to-use instance. The single point
 of translation between "a string in a config file" and "a live Python
 object" — nothing else in the codebase instantiates a rule class directly.
 """
+
+from dq_sentinel.engine.base import DQRuleBase
+
+
+class RuleFactory:
+    @staticmethod
+    def get_rule_instance(class_name: str):
+        rule_cls = DQRuleBase.registry.get(class_name)
+        if rule_cls is None:
+            available = ", ".join(sorted(DQRuleBase.registry.keys()))
+            raise ValueError(
+                f"Unknown DQ rule class: '{class_name}'. Available classes: {available}"
+            )
+        return rule_cls()
