@@ -1,4 +1,12 @@
 # Per-column DQ rule definitions for source1, in the shape:
-#   column_name: { RuleClassName: { method: ..., params: {...} } }
-# Resolved dynamically by RuleFactory at runtime — adding a rule here
-# never requires a code change.
+# Column_name: { DimensionClassName: { rule: ..., params: {...} } }
+
+
+order_id:
+  Completeness:
+    rule: is_not_null
+
+
+placed_time:
+  Completeness:
+    rule: is_not_null
