@@ -4,3 +4,16 @@ Completeness — checks whether required data is present in a column
 column is present at all is a schema-conformance metric, computed in
 DQProcessor, not here.
 """
+
+
+class Completeness():
+    
+    @staticmethod
+    def is_not_null(values):
+        """Return a row mask that passes values that are not null."""
+        return values.notna()
+
+    @staticmethod
+    def is_not_blank(values):
+        """Return a row mask that passes non-null, non-blank values."""
+        return values.notna() & values.astype("string").str.strip().ne("").fillna(False)
