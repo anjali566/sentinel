@@ -10,13 +10,13 @@ object" — nothing else in the codebase instantiates a rule class directly.
 from dq_sentinel.engine.base import DQRuleBase
 
 
-class RuleFactory:
+class DQRuleFactory:
     @staticmethod
-    def get_rule_instance(class_name: str):
-        rule_cls = DQRuleBase.registry.get(class_name)
+    def get_rule_instance(rule: str):
+        rule_cls = DQRuleBase.registry.get(rule)
         if rule_cls is None:
             available = ", ".join(sorted(DQRuleBase.registry.keys()))
             raise ValueError(
-                f"Unknown DQ rule class: '{class_name}'. Available classes: {available}"
+                f"Unknown DQ rule class: '{rule}'. Available classes: {available}"
             )
         return rule_cls()
