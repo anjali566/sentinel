@@ -12,23 +12,23 @@ Two responsibilities live here, and only these two:
 import pandas as pd
 
 
-class DQRuleBase:
+class DQDimensionBase:
     registry = {} 
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
-        DQRuleBase.registry[cls.__name__] = cls
+        DQDimensionBase.registry[cls.__name__] = cls
 
-    def execute(self, dq_check: str, series: pd.Series, **params) -> pd.Series:
-        check = getattr(self, dq_check, None)
-        if check is None or not callable(check):
+    def execute(self, dq_rule: str, series: pd.Series, **params) -> pd.Series:
+        rule = getattr(self, dq_rule, None)
+        if rule is None or not callable(rule):
             raise AttributeError(
-                f"'{dq_check}' is not implemented in rule class '{self.__class__.__name__}'"
+                f"'{dq_rule}' is not implemented in rule class '{self.__class__.__name__}'"
             )
-        result = check(series, **params)
+        result = rule(series, **params)
         if not isinstance(result, pd.Series):
             raise TypeError(
-                f"{self.__class__.__name__}.{dq_check} must return a boolean pandas Series, "
+                f"{self.__class__.__name__}.{dq_rule} must return a boolean pandas Series, "
                 f"got {type(result).__name__}"
             )
         return result
