@@ -117,8 +117,8 @@ Phase 2 replaces only the top of this chain (manual trigger → Airflow-schedule
     │
     ├── engine/
     │   ├── __init__.py
-    │   ├── base.py                    # DQRuleBase
-    │   ├── rule_factory.py            # RuleFactory
+    │   ├── base.py                    # DQDimensionBase
+    │   ├── rule_factory.py            # DQDimensionFactory
     │   └── dq_engine.py               # DQEngine — produces raw facts
     │
     ├── processor/
@@ -164,7 +164,7 @@ columns:
 ```yaml
 price:
   Validity:
-    method: isInRange
+    rule: isInRange
     params: { min_val: 0, max_val: 1000000 }
 ```
 
