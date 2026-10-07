@@ -21,14 +21,25 @@ class DQDimensionBase:
 
     def execute(self, rule: str, series: pd.Series, **params) -> pd.Series:
         rule_method = getattr(self, rule, None)
-        if rule is None or not callable(rule_method):
+        
+        if rule_method is None or not callable(rule_method):
             raise AttributeError(
-                f"'{rule}' is not implemented in rule class '{self.__class__.__name__}'"
+                f"'{rule}' is not implemented in the dimension '{self.__class__.__name__}'"
             )
         result = rule_method(series, **params)
+        
+        # Validate that the rule returned a pandas Series
         if not isinstance(result, pd.Series):
             raise TypeError(
                 f"{self.__class__.__name__}.{rule} must return a boolean pandas Series, "
                 f"got {type(result).__name__}"
             )
+
+        # Validate that the Series contains boolean values.
+        if result.dtype != bool:
+            raise TypeError(
+                f"{self.__class__.__name__}.{rule} must return a "
+                f"boolean pandas Series, got dtype '{result.dtype}'"
+            )
+    
         return result

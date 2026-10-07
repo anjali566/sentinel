@@ -17,6 +17,6 @@ class DQDimensionFactory:
         if dimension_cls is None:
             available = ", ".join(sorted(DQDimensionBase.registry.keys()))
             raise ValueError(
-                f"Unknown DQ Dimension class: '{dimension}'. Available Dimensions: {available}"
+                f"Unknown DQ Dimension: '{dimension}'. Available Dimensions: {available}"
             )
         return dimension_cls()

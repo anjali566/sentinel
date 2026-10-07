@@ -38,17 +38,17 @@ class DQEngine:
         """
         facts = {}
 
-        for column, rules in self.config.items():
+        for column, dimension_specs in self.config.items():
             if column not in self.df.columns:
                 # column expected by config but missing from the data -> record the
                 # fact that the check couldn't run, don't silently skip or crash
-                for dimension, spec in rules.items():
+                for dimension, spec in dimension_specs.items():
                     rule, _ = self._parse_spec(spec)
                     check_id = f"check_{column}_{rule}".lower()
                     facts[check_id] = self._missing_column_fact(column, dimension, rule)
                 continue
 
-            for dimension, spec in rules.items():
+            for dimension, spec in dimension_specs.items():
                 rule, params = self._parse_spec(spec)
                 params = self._resolve_column_params(params)
 
@@ -73,9 +73,10 @@ class DQEngine:
         before calling the rule method.
         """
         params = dict(params)
-        if "compare_column" in params:
-            compare_col = params.pop("compare_column")
-            params["compare_series"] = self.df[compare_col]
+        # TODO: Validate and handle compare_column
+        # if "compare_column" in params:l;
+        #     compare_col = params.pop("compare_column")
+        #     params["compare_series"] = self.df[compare_col]
         return params
 
     def _missing_column_fact(self, column, dimension, rule) -> dict:
