@@ -13,7 +13,7 @@ not by DQProcessor (see ADR-002 and the Phase 1 two-stage revision).
 
 
 import pandas as pd
-from dq_sentinel.engine.rule_factory import DQDimensionFactory
+from dq_sentinel.engine.dimension_factory import DQDimensionFactory
 
 
 class DQEngine:
