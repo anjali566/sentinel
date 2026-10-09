@@ -19,4 +19,4 @@ class Completeness(DQDimensionBase):
     @staticmethod
     def is_not_blank(values):
         """Return a row mask that passes non-null, non-blank values."""
-        return values.notna() & values.astype("string").str.strip().ne("").fillna(False)
+        return values.notna() & values.astype("string").str.strip().ne("").fillna(False).astype(bool)
