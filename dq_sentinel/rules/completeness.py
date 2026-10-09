@@ -6,7 +6,10 @@ DQProcessor, not here.
 """
 
 
-class Completeness():
+import pandas as pd
+from dq_sentinel.engine.base import DQDimensionBase
+
+class Completeness(DQDimensionBase):
     
     @staticmethod
     def is_not_null(values):
