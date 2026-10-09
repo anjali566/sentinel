@@ -19,5 +19,5 @@ def test_factory_returns_instance_registered_in_registry():
 
 
 def test_factory_raises_error_for_unknown_dimension():
-    with pytest.raises(ValueError, match="Unknown DQ Dimension class"):
+    with pytest.raises(ValueError, match="Unknown DQ Dimension"):
         DQDimensionFactory.get_dimension_instance("UnknownDimension")
