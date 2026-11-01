@@ -21,14 +21,14 @@
 
 ## Overview
 
-dq_sentinel checks the quality of order-event data arriving from multiple trading venues, all conforming to a shared SLA-defined schema. It dynamically applies configured rules per column via a self-registering factory pattern, stores results in MongoDB, and surfaces them on a Plotly dashboard.
+dq_sentinel checks the quality of order-event data arriving from multiple data sources, all conforming to a shared SLA-defined schema. It dynamically applies configured rules per column via a self-registering factory pattern, stores results in MongoDB, and surfaces them on a Plotly dashboard.
 
 Built from real banking/FinTech ETL experience, and deliberately engineered rather than wrapped around an existing vendor tool — every design decision below was made explicitly, with trade-offs considered, rather than defaulted into.
 
 ## Requirements (as gathered)
 
 **Functional:**
-- Ingest order-event data from multiple trading venues, all sharing one SLA-defined schema
+- Ingest data from multiple venues/sources, all sharing one SLA-defined schema
 - Run configurable data quality checks across multiple dimensions
 - Store results
 - Visualize results on a dashboard
@@ -79,12 +79,12 @@ Phase 2 replaces only the top of this chain (manual trigger → Airflow-schedule
 | Dimension | Description | Status |
 |---|---|---|
 | Completeness | Missing values, null checks | ✅ |
-| Uniqueness | Duplicate detection | ✅ |
-| Validity | Format/range/enum conformance | ✅ |
-| Accuracy | Value correctness against expected type/pattern | ✅ |
-| Timeliness | Data freshness / latency vs SLA | ✅ |
-| Integrity | Referential integrity against reference data | ✅ |
-| Consistency | Cross-field agreement within a row | ✅ |
+| Uniqueness | Duplicate detection | ⬜ |
+| Validity | Format/range/enum conformance | ⬜ |
+| Accuracy | Value correctness against expected type/pattern | ⬜ |
+| Timeliness | Data freshness / latency vs SLA | ⬜ |
+| Integrity | Referential integrity against reference data | ⬜ |
+| Consistency | Cross-field agreement within a row | ⬜ |
 
 *(✅ = built and demoed with a synthetic dataset; ⬜ = designed, not yet built)*
 
