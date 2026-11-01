@@ -189,7 +189,6 @@ price:
 ## Roadmap
 
 **Phase 1 — Walking skeleton (current)**
-- [ ] `SchemaConformance` rule class
 - [ ] `MongoDataSource` (fetch + save results)
 - [ ] Manual data generator matching the SLA schema
 - [ ] Manually-invoked Runner, single and multi-source
