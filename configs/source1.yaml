@@ -10,3 +10,7 @@ order_id:
 placed_time:
   Completeness:
     rule: is_not_null
+
+quantity:
+  Accuracy:
+    rule: is_positive
